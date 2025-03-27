@@ -7,6 +7,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Repositories\Interfaces\AuthRepositoryInterface;
+use Exception;
 
 class AuthRepository implements AuthRepositoryInterface
 {
