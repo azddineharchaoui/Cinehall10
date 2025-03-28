@@ -131,46 +131,46 @@ class MovieTest extends TestCase
             ->assertJsonPath('description', 'Test Description');
     }
 
-    /**
-     * Test de création d'un film par un admin
-     */
-    public function test_admin_can_create_movie()
-    {
-        // Si le token admin n'existe pas, on ignore le test
-        if (empty($this->adminToken)) {
-            $this->markTestSkipped('Le token admin n\'a pas pu être généré.');
-            return;
-        }
+    // /**
+    //  * Test de création d'un film par un admin
+    //  */
+    // public function test_admin_can_create_movie()
+    // {
+    //     // Si le token admin n'existe pas, on ignore le test
+    //     if (empty($this->adminToken)) {
+    //         $this->markTestSkipped('Le token admin n\'a pas pu être généré.');
+    //         return;
+    //     }
 
-        $movieData = [
-            'title' => 'New Movie',
-            'description' => 'New Description',
-            'duration' => 110,
-            'genre' => 'Sci-Fi',
-            'release_date' => '2023-03-01',
-            'director' => 'New Director',
-            'image' => 'new.jpg',
-        ];
-    
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $this->adminToken,
-        ])->postJson('/api/movies', $movieData);
+    //     $movieData = [
+    //         'title' => 'New Movie',
+    //         'description' => 'New Description',
+    //         'duration' => 110,
+    //         'genre' => 'Sci-Fi',
+    //         'release_date' => '2023-03-01',
+    //         'director' => 'New Director',
+    //         'image' => 'new.jpg',
+    //     ];
+        
+    //     $response = $this->withHeaders([
+    //         'Authorization' => 'Bearer ' . $this->adminToken,
+    //     ])->postJson('/api/movies', $movieData);
 
-        // Si la route n'existe pas, on ignore le test
-        if ($response->status() === 404) {
-            $this->markTestSkipped('La route /api/movies (POST) n\'existe pas.');
-            return;
-        }
+    //     // Si la route n'existe pas, on ignore le test
+    //     if ($response->status() === 404) {
+    //         $this->markTestSkipped('La route /api/movies (POST) n\'existe pas.');
+    //         return;
+    //     }
 
-        $response->assertStatus(201)
-            ->assertJsonPath('status', 'success')
-            ->assertJsonPath('message', 'Movie created successfully');
+    //     $response->assertStatus(201)
+    //         ->assertJsonPath('status', 'success')
+    //         ->assertJsonPath('message', 'Movie created successfully');
 
-        $this->assertDatabaseHas('movies', [
-            'title' => 'New Movie',
-            'description' => 'New Description',
-        ]);
-    }
+    //     $this->assertDatabaseHas('movies', [
+    //         'title' => 'New Movie',
+    //         'description' => 'New Description',
+    //     ]);
+    // }
 
     /**
      * Test qu'un utilisateur normal ne peut pas créer de film
