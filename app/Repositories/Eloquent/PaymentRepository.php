@@ -42,7 +42,6 @@ class PaymentRepository extends BaseRepository implements PaymentRepositoryInter
      */
     public function processPayment(int $reservationId, float $amount, string $paymentMethod, string $transactionId): Payment
     {
-        // Update reservation status
         $reservation = Reservation::findOrFail($reservationId);
         $reservation->status = 'paid';
         $reservation->save();
